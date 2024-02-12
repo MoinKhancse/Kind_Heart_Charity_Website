@@ -1,0 +1,51 @@
+{% extends "adminpanel/admin_base.html" %}
+
+{% load static %}
+
+{% block content %}
+               <!-- dashboard inner -->
+            <div class="midde_cont">
+                <div class="container-fluid">
+                   <div class="row column_title">
+                      <div class="col-md-12">
+                         <div class="page_title">
+                            <h2>Dashboard</h2>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="container-fluid" style="border: 1px solid black; border-radius: 5px; padding: 30px; ">
+                     <div class="row">
+                        <div class="col-md-10">
+                            {% comment %} {% for edit_all in edit_all  %}             {% endcomment %}
+                           <form action="{% url 'edit' edit_all.id  %}" method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <div class="mb-3">
+                                <label for="slider" class="form-label">Slider Title</label>           
+                                <input type="text" class="form-control" name="slider_title" value="{{ edit_all.slider_title }}" id="slider" placeholder="Insert Title">
+                              </div>
+                              <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea type="text" rows="5" cols="10" class="form-control" value="" name="slider_desc" id="description" placeholder="Description">{{ edit_all.slider_description }}</textarea>
+                              </div>
+                              <div>
+                                 {% if edit_all.slider_image %} 
+                                 <img src="/media/{{edit_all.slider_image}}" alt="Image" style="height: 100px; width: 100px">
+                                 {% endif %}
+                              </div>
+                              <div class="mb-3">
+                                 <label for="image" class="form-label">Slider Image</label>
+                                 <input type="file" class="form-control" name="slider_image" id="image">
+                               </div>                           
+                              <button type="submit" class="btn btn-primary">Up Date</button>
+                            </form>
+                            {% comment %} {% endfor %}   {% endcomment %}
+                        </div>
+                     </div>                   
+                   </div>
+                </div>
+            </div>
+            <!-- end dashboard inner -->
+
+{% endblock content %}
+
+{% comment %} edit_all.slider_image.url {% endcomment %}
